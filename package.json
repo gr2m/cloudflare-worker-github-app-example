@@ -1,0 +1,13 @@
+{
+  "name": "cloudflare-workers-playground",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Cloudflare Worker + GitHub App Example",
+  "main": "worker.js",
+  "author": "Gregor Martynus (https://twitter.com/gr2m)",
+  "license": "ISC",
+  "repository": "https://github.com/gr2m/cloudflare-worker-github-app-example",
+  "dependencies": {
+    "@octokit/app": "^10.0.2"
+  }
+}
