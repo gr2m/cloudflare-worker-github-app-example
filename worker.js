@@ -71,11 +71,12 @@ async function handleRequest(request) {
   }
 
   const id = request.headers.get("x-github-delivery");
-  // const signature = request.headers.get("x-hub-signature-256");
   const name = request.headers.get("x-github-event");
   const payload = await request.json();
 
   try {
+    // TODO: implement signature verification
+    // https://github.com/gr2m/cloudflare-worker-github-app-example/issues/1
     await app.webhooks.receive({
       id,
       name,
@@ -86,8 +87,7 @@ async function handleRequest(request) {
       headers: { "content-type": "application/json" },
     });
   } catch (error) {
-    console.log("error");
-    console.log(error);
+    app.log.error(error);
 
     return new Response(`{ "error": "${error.message}" }`, {
       status: 500,
