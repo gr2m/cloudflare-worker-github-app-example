@@ -9,5 +9,10 @@
   "repository": "https://github.com/gr2m/cloudflare-worker-github-app-example",
   "dependencies": {
     "@octokit/app": "^10.0.2"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
   }
 }
