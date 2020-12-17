@@ -72,7 +72,7 @@ That should be it. The `worker.js` file will now be continously deployed to Clou
 
 ## See also
 
-- [Cloudflare Worker GitHub App Example](https://github.com/gr2m/cloudflare-worker-github-app-example/#readme)
+- [Cloudflare Worker GitHub OAuth Example](https://github.com/gr2m/cloudflare-worker-github-oauth-login/#readme)
 
 ## Credits
 
