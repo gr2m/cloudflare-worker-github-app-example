@@ -6,7 +6,7 @@
   "main": "worker.js",
   "author": "Gregor Martynus (https://twitter.com/gr2m)",
   "license": "ISC",
-  "repository": "https://github.com/gr2m/cloudflare-worker-github-app-example",
+  "repository": "github:gr2m/cloudflare-worker-github-app-example",
   "dependencies": {
     "@octokit/app": "^10.0.2"
   },
