@@ -1,4 +1,5 @@
 import { App } from "@octokit/app";
+import { verifyWebhookSignature } from "./lib/verify.js";
 
 export default {
   /**
@@ -63,11 +64,23 @@ export default {
 
     const id = request.headers.get("x-github-delivery");
     const name = request.headers.get("x-github-event");
-    const payload = await request.json();
+    const signature = request.headers.get("x-hub-signature-256") ?? "";
+    const payloadString = await request.text();
+    const payload = JSON.parse(payloadString);
 
+    // Verify webhook signature
     try {
-      // TODO: implement signature verification
-      // https://github.com/gr2m/cloudflare-worker-github-app-example/issues/1
+      await verifyWebhookSignature(payloadString, signature, secret);
+    } catch (error) {
+      app.log.warn(error.message);
+      return new Response(`{ "error": "${error.message}" }`, {
+        status: 400,
+        headers: { "content-type": "application/json" },
+      });
+    }
+
+    // Now handle the request
+    try {
       await app.webhooks.receive({
         id,
         name,
