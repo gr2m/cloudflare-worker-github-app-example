@@ -1,4 +1,4 @@
-const { App } = require("@octokit/app");
+import { App } from "@octokit/app";
 
 export default {
   /**
