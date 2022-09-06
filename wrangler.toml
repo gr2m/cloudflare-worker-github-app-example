@@ -3,3 +3,4 @@ account_id = "f8d9cac88285c4d654ba305a92e952d6"
 workers_dev = true
 
 main = "worker.js"
+compatibility_date = "2020-12-17"
