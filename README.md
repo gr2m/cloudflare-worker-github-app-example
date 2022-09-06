@@ -23,7 +23,7 @@ Note that you require access to the new GitHub Actions for the automated deploym
 1. Install the `wrangler` CLI and login with your account
 
    ```
-   npm install --global @cloudflare/wrangler
+   npm install --global wrangler
    wrangler login
    ```
 
@@ -42,7 +42,7 @@ Note that you require access to the new GitHub Actions for the automated deploym
      wrangler secret put WEBHOOK_SECRET
      ```
 
-   - `PRIVATE_KEY_1`, `PRIVATE_KEY_2`, `PRIVATE_KEY_3`: Generate a private key (see the button at the bottom of your GitHub App registration's settings page).
+   - `PRIVATE_KEY`: Generate a private key (see the button at the bottom of your GitHub App registration's settings page).
 
      1. You will be prompted to download a `*.pem` file. After download, rename it to `private-key.pem`.
      1. Convert the key from the `PKCS#1` format to `PKCS#8` (The WebCrypto API only supports `PKCS#8`):
@@ -51,18 +51,10 @@ Note that you require access to the new GitHub Actions for the automated deploym
         openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in private-key.pem -out private-key-pkcs8.pem
         ```
 
-     1. The contents of the private key is too large for the 1kb limit of Cloudflare Workers secrets. Split it up into 3 parts using [split](https://man.cx/split). This will create 3 new files: `xaa`, `xab`, `xac`
+     1. Write the contents of the new file into the secret `PRIVATE_KEY`:
 
         ```
-        split -l 10 private-key-pkcs8.pem
-        ```
-
-     1. Write the contents of the 3 new files into the secrets `PRIVATE_KEY_1`, `PRIVATE_KEY_2`, and `PRIVATE_KEY_3`:
-
-        ```
-        cat xaa | wrangler secret put PRIVATE_KEY_1
-        cat xab | wrangler secret put PRIVATE_KEY_2
-        cat xac | wrangler secret put PRIVATE_KEY_3
+        cat private-key-pkcs8.pem | wrangler secret put PRIVATE_KEY
         ```
 
 1. Add the following secret in your fork's repository settings:
